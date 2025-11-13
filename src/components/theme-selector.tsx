@@ -17,7 +17,7 @@ export const ThemeSelector = () => {
     }
   }, [darkMode]);
   return (
-    <Button size={'icon'} onClick={() => setDarkMode(!darkMode)}>
+    <Button variant="outline" size={'icon'} onClick={() => setDarkMode(!darkMode)}>
       {darkMode ? <Moon /> : <Sun />}
     </Button>
   );
