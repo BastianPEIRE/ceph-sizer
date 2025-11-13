@@ -1,26 +1,73 @@
-# ceph-sizer
+# React + TypeScript + Vite
 
-A Ceph sizer for capacity and h/w configuration design
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-The Ceph Sizer is intended to provide a tool to design a Ceph cluster based on required workloads, infrastructure dependencies, config requirements, etc., mapped to a h/w configuration available. From a set of possible configurations given by a supported set of config options of server hardware, variations can be assessed for the same workloads at a time.
+Currently, two official plugins are available:
 
-The actual implementation is by no means complete, nor nice, but simply a beginners level for JavaScript port of previous spreadsheet based prototype. There are many things to improve and develop.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-The basic functionality is intended to work like this:
+## React Compiler
 
-- any viable h/w configuration can be provided into the "Available chassis configuration options" table
-- the required workloads are entered into the table "workloads required with characteristics"
-- once both tables have desired values entered, the resulting configurations processed and displayed
-- as an overview for the configs in table "Resulting configuration"
-- and detailed per individual h/w config and DC in the tables named "Resulting configuration config #"
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Any modifications can be done either to the workloads or to the h/w configurations and can be applied with the buttons.
+## Expanding the ESLint configuration
 
-The converter is just only a calculator. The values are not incorporated into the workloads. Any radio buttons in the top of the actual page are not functional yet.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Calculations base:
-The calculations are based on collocation rules stated by the products by Red Hat and IBM, as well as on recommendations for production clusters. Those might change over time or might need change for better performance or better budget. Any of those values are tunables.
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Ratios used are experience based values for now that might not hold true. These are tunables. The ratios for media should base on IOPS differences and workload structure and might not be fixed values. Most of those heavily depend on media performance characteristics. While those ratios are preset to some defaults, this doesn't guarantee any working configuration. In the future, additional explanations will be provided. With changes in the code, also the ratios based on IOPS characteristics might change.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-The possible workload configurations might not be supported with the vendors. If you don't run community bits anyway, check with your support provider about the possible infrastructure design.
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
