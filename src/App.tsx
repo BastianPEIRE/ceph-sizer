@@ -1,10 +1,11 @@
 import './App.css'
+import { Button } from './components/ui/button';
 
 function App() {
 
   return (
-    <div>
-      <h1>A Ceph sizer htmlFor capacity, configuration, and subscriptions</h1>
+    <div className='flex flex-col justify-center items-center min-h-screen gap-4'>
+      <h1 className='text-2xl font-bold'>A Ceph sizer for capacity, configuration, and subscriptions</h1>
       <table> 
         <thead>
           <tr>
@@ -20,7 +21,9 @@ function App() {
             <form id="general-values"> 
                 <tr>
                     <td>Converter from TiB into TB: (value not applied - calulation only; only TB used in calc)</td>
-                    <td><button id="button-capacity-tib" type="submit" data-target="tib">Convert</button></td>
+                    <td>
+                      <Button id="button-capacity-tib" type="submit" data-target="tib">Convert</Button>
+                    </td>
                     <td width="250" align="center">
                         <input type="text" id="global-capacity-tib-input" />
                     </td>
@@ -99,39 +102,39 @@ function App() {
                 </tr>
             </form>
         </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td>Chassis config file load:</td>
-                <td>
-                    <input type="file" id="input-filename-chassis-config" />
-                </td>
-                <td>Workload config file load:</td>
-                <td>
-                    <input type="file" id="input-filename-workload-config" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td style={{minWidth: "50px"}}>
-                    <td><b>Error messages:</b></td>
-                    <td style={{minWidth: "100px", border: "1px solid black"}}>
-                        <p id="error-message" />
-                    </td>
-                </td>
-                <td style={{minWidth: "50px", textAlign: "left"}}>
-                    <td><b>InhtmlFormation & Warnings:</b></td>
-                    <td style={{minWidth: "100px", border: "1px solid black"}}>
-                    <p id="misc-message"></p>   
-                </td>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+      </table>
+      <table>
+          <tbody>
+              <tr>
+                  <td>Chassis config file load:</td>
+                  <td>
+                      <input type="file" id="input-filename-chassis-config" />
+                  </td>
+                  <td>Workload config file load:</td>
+                  <td>
+                      <input type="file" id="input-filename-workload-config" />
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <table>
+          <tbody>
+              <tr>
+                  <td style={{minWidth: "50px"}}>
+                      <td><b>Error messages:</b></td>
+                      <td style={{minWidth: "100px", border: "1px solid black"}}>
+                          <p id="error-message" />
+                      </td>
+                  </td>
+                  <td style={{minWidth: "50px", textAlign: "left"}}>
+                      <td><b>InhtmlFormation & Warnings:</b></td>
+                      <td style={{minWidth: "100px", border: "1px solid black"}}>
+                      <p id="misc-message"></p>   
+                  </td>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
     </div>
   )
 }
