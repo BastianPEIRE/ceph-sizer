@@ -1,26 +1,19 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
+import type { ChassisConfiguration } from '../lib/models/chassis-configuration';
 
 type Config = {
-  apiUrl: string;
-  theme: 'light' | 'dark';
-  language: string;
-};
-
-const defaultConfig: Config = {
-  apiUrl: 'https://api.example.com',
-  theme: 'light',
-  language: 'en',
+  chassisConfiguration: ChassisConfiguration[] | undefined;
 };
 
 type ConfigContextType = {
-  config: Config;
-  setConfig: React.Dispatch<React.SetStateAction<Config>>;
+  config: Config | undefined;
+  setConfig: React.Dispatch<React.SetStateAction<Config | undefined>>;
 };
 
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 
 export const ConfigProvider = ({ children }: { children: ReactNode }) => {
-  const [config, setConfig] = useState<Config>(defaultConfig);
+  const [config, setConfig] = useState<Config>();
 
   return <ConfigContext.Provider value={{ config, setConfig }}>{children}</ConfigContext.Provider>;
 };

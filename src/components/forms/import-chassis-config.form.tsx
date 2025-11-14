@@ -9,7 +9,7 @@ const formSchema = z.object({
   file: z.string(),
 });
 
-export const ChassisConfigForm = () => {
+export const ImportChassisConfigForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
